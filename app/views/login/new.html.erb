@@ -1,0 +1,43 @@
+<%= error_messages_for 'user' %> 
+<div class="signup-form">
+  <fieldset>
+    <legend>Enter User Details</legend>
+    <% form_for (:user, :url => { :action => "create" }, :html => { :multipart => true }) do |form| %>
+       <p>
+         <label for="user_username" class="left" style="width:30%;">UserName:</label>
+         <%= form.text_field :username %>
+       </p>
+			 <div id="testdiv" style="color:red;"></div>
+       <p>
+         <label for="user_email" class="left" style="width:30%;">Email:</label>
+         <%= form.text_field :email %>
+       </p>
+       <p>
+         <label for="user_password" class="left" style="width:30%;">Password:</label>
+         <%= form.password_field :password %>
+       </p>
+       <p>
+         <label for="user_password_confirmation" class="left" style="width:30%;">Confirm:</label>
+         <%= form.password_field :password_confirmation %>
+       </p>
+       <p>
+         <label for="user_firstname" class="left" style="width:30%;">FirstName:</label>
+         <%= form.text_field :firstname %>
+       </p>
+       <p>
+         <label for="user_lastname" class="left" style="width:30%;">LastName:</label>
+         <%= form.text_field :lastname %>
+       </p>
+       <p>
+         <label for="user_birthdate" class="left" style="width:30%;">BirthDate:</label>
+         <%= form.text_field :birthdate %>
+       </p>
+       <p>
+         <label for="user_sex" class="left" style="width:30%;">Sex:</label>
+         <%= form.text_field :sex %>
+       </p>
+	       <%= submit_tag "Create" , :class => "submit" %>
+       <%= link_to 'Back', :action => "index", :controller => :login %>
+    <% end %>
+  </fieldset>
+</div>
