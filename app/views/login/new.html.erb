@@ -5,13 +5,9 @@
     <% form_for (:user, :url => { :action => "create" }, :html => { :multipart => true }) do |form| %>
        <p>
          <label for="user_username" class="left" style="width:30%;">UserName:</label>
-         <%= form.text_field :username %>
+         <%= form.text_field :username %><%= submit_to_remote "check_availability", "Check Availability", :url => {:action => 'check_username_availability' } %>
        </p>
 			 <div id="testdiv" style="color:red;"></div>
-       <p>
-         <label for="user_email" class="left" style="width:30%;">Email:</label>
-         <%= form.text_field :email %>
-       </p>
        <p>
          <label for="user_password" class="left" style="width:30%;">Password:</label>
          <%= form.password_field :password %>
@@ -29,12 +25,16 @@
          <%= form.text_field :lastname %>
        </p>
        <p>
+         <label for="user_email" class="left" style="width:30%;">Email:</label>
+         <%= form.text_field :email %>
+       </p>
+       <p>
          <label for="user_birthdate" class="left" style="width:30%;">BirthDate:</label>
          <%= form.text_field :birthdate %>
        </p>
        <p>
          <label for="user_sex" class="left" style="width:30%;">Sex:</label>
-         <%= form.text_field :sex %>
+         <%= select("user", "sex" , @sex) %>
        </p>
 	       <%= submit_tag "Create" , :class => "submit" %>
        <%= link_to 'Back', :action => "index", :controller => :login %>
