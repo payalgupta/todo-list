@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	require 'digest/sha1'
-
+	has_many :todolists
 	validates_presence_of	:username, :firstname, :lastname, :email
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i

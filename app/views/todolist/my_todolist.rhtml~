@@ -1,0 +1,6 @@
+<% for todolist in @todolists %>
+	<div>
+	  <h4><u><%= todolist.title %></u></h4>
+	  <p><%= todolist.description %></p>
+	</div>
+<% end %>

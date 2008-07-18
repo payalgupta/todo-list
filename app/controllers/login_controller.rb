@@ -1,4 +1,5 @@
 class LoginController < ApplicationController
+  before_filter :authorize, :except => [:login, :new, :create, :check_username_availability]
   def index
     @users = User.find(:all)
   end
@@ -12,7 +13,7 @@ class LoginController < ApplicationController
     @user = User.new(params[:user])
 		if @user.save
       flash[:success] = "User #{@user.username} was successfully created."
-      redirect_to(:action => :index, :controller => :login)
+      redirect_to(:action => :login, :controller => :login)
     else
       render(:action => :new)
     end
@@ -41,7 +42,7 @@ class LoginController < ApplicationController
       user = User.authenticate(params[:username], params[:password])
       if user
 				session[:user_id] = user.id
-				redirect_to(:action => "index", :controller => :login )
+				redirect_to(:action => "index", :controller => :todolist )
       else
         flash.now[:error] = "Enter valid username/password"
 	      render(:action => "login" )
