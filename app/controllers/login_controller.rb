@@ -36,6 +36,23 @@ class LoginController < ApplicationController
   end
 
   def login
+    session[:user_id] = nil
+    if request.post?
+      user = User.authenticate(params[:username], params[:password])
+      if user
+				session[:user_id] = user.id
+				redirect_to(:action => "index", :controller => :login )
+      else
+        flash.now[:error] = "Enter valid username/password"
+	      render(:action => "login" )
+      end
+    end 
+  end
+
+  def logout
+    session[:user_id] = nil
+    flash[:notice] = "You have successfully Logged out"
+    redirect_to(:action => "login" )	  
   end
 
 end
