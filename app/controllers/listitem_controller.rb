@@ -5,7 +5,7 @@ class ListitemController < ApplicationController
     todolist = Todolist.find(params[:listitem][:todolist_id])
     listitem = Listitem.new(params[:listitem])
     todolist.listitems << listitem
-    redirect_to(:controller => 'todolist', :action => ' list_all')
+    redirect_to(:controller => 'todolist', :action => 'list_all')
   end
 
 end
