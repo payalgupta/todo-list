@@ -11,7 +11,11 @@
         <h1>Todolist Application</h1>  
       </div>
       <div id="message">
-        <%= notifications %>
+        <% [:error, :notice, :success].each do |element| %>
+          <% if flash[element] %>
+            <div class="<%= element %>" ><%= flash[element] %></div>
+          <% end %>
+        <% end %>
       </div>
       <div id="content">
         <div class="left">
