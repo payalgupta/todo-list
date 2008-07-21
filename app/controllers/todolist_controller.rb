@@ -1,4 +1,5 @@
 class TodolistController < ApplicationController
+  before_filter :authorize
   def new
     @todolist = Todolist.new
   end
@@ -15,9 +16,9 @@ class TodolistController < ApplicationController
     @todolist = Todolist.new(params[:todolist])
 		if @todolist.save
       flash[:success] = "Todo #{@todolist.title} was successfully created."
-      redirect_to(:action => :index, :controller => :todolist)
+      redirect_to(:controller => 'todolist', :action => 'index')
     else
-      render(:action => :new)
+      render(:action => 'new')
     end
 
   end

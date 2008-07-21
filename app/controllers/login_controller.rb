@@ -12,7 +12,7 @@ class LoginController < ApplicationController
     @user = User.new(params[:user])
 		if @user.save
       flash[:success] = "User #{@user.username} was successfully created."
-      redirect_to(:action => :login, :controller => :login)
+      redirect_to(:controller => 'login', :action => 'login')
     else
       render(:action => :new)
     end
@@ -39,10 +39,10 @@ class LoginController < ApplicationController
       user = User.authenticate(params[:username], params[:password])
       if user
 				session[:user_id] = user.id
-				redirect_to(:action => "index", :controller => :todolist )
+				redirect_to(:controller => 'todolist', :action => 'index')
       else
         flash.now[:error] = "Enter valid username/password"
-	      render(:action => "login" )
+	      render(:action => 'login' )
       end
     end 
   end
@@ -50,7 +50,7 @@ class LoginController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = "You have successfully Logged out"
-    redirect_to(:action => "login" )	  
+    redirect_to(:action => 'login' )	  
   end
 
 end
