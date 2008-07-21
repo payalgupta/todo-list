@@ -1,14 +1,17 @@
 class User < ActiveRecord::Base
 	require 'digest/sha1'
 	has_many :todolists
+  SEX = ["Male", "Female"]
 	validates_presence_of	:username, :password, :firstname, :lastname, :email
   validates_format_of :email,
-                      :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
+                      :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
+                      :message => "InValid",
+                      :if => Proc.new { |u| !u.email.blank? }
+
 	validates_uniqueness_of	:username, :email
 	
 	attr_accessor :password_confirmation
 	validates_confirmation_of :password
-  SEX = ["Male", "Female"]
 	def password
 		@password
 	end

@@ -14,12 +14,12 @@ class TodolistController < ApplicationController
 
   def create
     @todolist = Todolist.new(params[:todolist])
+    @todolist.user = current_user
 		if @todolist.save
       flash[:success] = "Todo #{@todolist.title} was successfully created."
       redirect_to(:controller => 'todolist', :action => 'index')
     else
       render(:action => 'new')
     end
-
   end
 end
