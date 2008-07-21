@@ -5,7 +5,6 @@ class LoginController < ApplicationController
   end
 
   def new
-    @sex = ["Male", "Female"]
     @user = User.new
   end
 
@@ -20,19 +19,17 @@ class LoginController < ApplicationController
   end
 
 	def check_username_availability
-		@message = nil
-		@username = params[:user][:username]
-		if @username.blank?
-			@message = "Username should not be blank."
+		if params[:user][:username].blank?
+			message = "Username should not be blank."
 		else
-		  if User.find_by_username(@username)
-		      @message = "Username not available"
+		  if User.find_by_username(params[:user][:username])
+		      message = "Username not available"
 		  else
-		      @message = "Username available."
+		      message = "Username available."
 		  end
 		end 
    		render :update do |page|
-			page.replace_html 'testdiv', :partial => 'check_availability'
+			page.replace_html 'availability_msg', message
 		end
   end
 

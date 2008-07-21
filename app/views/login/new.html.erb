@@ -7,7 +7,7 @@
          <label for="user_username" class="left" style="width:30%;">UserName:</label>
          <%= form.text_field :username %><%= submit_to_remote "check_availability", "Check Availability", :url => {:action => 'check_username_availability' } %>
        </p>
-			 <div id="testdiv" style="color:red;"></div>
+			 <div id="availability_msg" style="color:red;"></div>
        <p>
          <label for="user_password" class="left" style="width:30%;">Password:</label>
          <%= form.password_field :password %>
@@ -34,7 +34,7 @@
        </p>
        <p>
          <label for="user_sex" class="left" style="width:30%;">Sex:</label>
-         <%= select("user", "sex" , @sex) %>
+         <%= select("user", "sex" , User::SEX) %>
        </p>
 	       <%= submit_tag "Create" , :class => "submit" %>
        <%= link_to 'Back', :action => "index", :controller => :login %>
