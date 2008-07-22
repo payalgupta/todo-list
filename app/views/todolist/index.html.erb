@@ -1,0 +1,14 @@
+<% for todolist in @todolists %>
+	<div>
+	  <h4><u><%= todolist.title %></u></h4>
+	  <p><%= todolist.description %></p>
+    <h6><%= link_to 'Add List Item', :action => "new", :controller => :listitem, :id => todolist.id %></h6>
+    <div>
+    <div>
+      <% todolist.listitems.each do |listitem| %>
+      <p><%= check_box("listitem", "is_completed", {}) %><%= listitem.listitem %></p>
+      <% end %>
+    </div>
+    </div>
+	</div>
+<% end %>
