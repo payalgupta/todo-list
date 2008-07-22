@@ -4,12 +4,7 @@ class TodolistController < ApplicationController
     @todolist = Todolist.new
   end
 
-  def list_all
-    @todolists = Todolist.find(:all)
-  end
-
-  def my_todolist
-    @todolists = Todolist.find_by_user_id(current_user.id)
+  def show
   end
 
   def create
@@ -17,7 +12,7 @@ class TodolistController < ApplicationController
     @todolist.user = current_user
 		if @todolist.save
       flash[:success] = "Todo #{@todolist.title} was successfully created."
-      redirect_to(:controller => 'todolist', :action => 'index')
+      redirect_to(todolist_path)
     else
       render(:action => 'new')
     end

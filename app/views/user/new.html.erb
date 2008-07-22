@@ -2,12 +2,12 @@
 <div class="signup-form">
   <fieldset>
     <legend>Enter User Details</legend>
-    <% form_for (:user, :url => {:action => 'create'}, :html => { :multipart => true }) do |form| %>
+    <% form_for(:user, :url => user_path, :html => { :multipart => true }) do |form| %>
        <p>
          <label for="user_username" class="left" style="width:30%;">UserName:</label>
          <%= form.text_field :username %><%= submit_to_remote "check_availability", "Check Availability", :url => {:action => 'check_username_availability' } %>
        </p>
-			 <div id="availability_msg" style="color:red;"></div>
+			 <div id="availability_msg"></div>
        <p>
          <label for="user_password" class="left" style="width:30%;">Password:</label>
          <%= form.password_field :password %>
@@ -36,8 +36,8 @@
          <label for="user_sex" class="left" style="width:30%;">Sex:</label>
          <%= select("user", "sex" , User::SEX) %>
        </p>
-	       <%= submit_tag "Create" , :class => "submit" %>
-       <%= link_to 'Back', :controller => 'login', :action => 'index'%>
+	       <%= form.submit 'Create' %>
+       <%= link_to 'Back',login_path %>
     <% end %>
   </fieldset>
 </div>

@@ -1,0 +1,9 @@
+<%= error_messages_for 'listitem' %> 
+<%form_remote_for :listitem, :url => {:controller => :listitem, :action => 'add_listitem'} do |f| %>
+  <p>
+    <%= f.label :Listitem %><br /> 
+    <%= f.text_field :listitem %>
+  </p>
+  <%= submit_tag 'Save' %>
+  <%= hidden_field 'listitem', 'todolist_id', :value => params[:todolist] %>
+<% end %>

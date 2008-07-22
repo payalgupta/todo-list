@@ -3,7 +3,6 @@
   <title>TodoList</title>
     <%= stylesheet_link_tag "todolist" , :media => "all" %>
     <%= javascript_include_tag :defaults %>
-    <%= javascript_include_tag 'prototype' %>
   </head>
   <body>
     <div id="wrapper">
@@ -22,8 +21,7 @@
           <%= yield :layout %>
         </div>
         <div class="right">
-          <p><%= link_to 'Create New Todo', :action => "new", :controller => :todolist %></p>
-          <p><%= link_to 'ShowAll', :action => "list_all", :controller => :todolist %></p>
+          <p><%= link_to 'Create New Todo', new_todolist_path %></p>
           <p><%= link_to 'Logout', :action => "logout", :controller => :login %></p>
         </div>        
       </div>
