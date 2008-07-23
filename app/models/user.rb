@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
   SEX = ["Male", "Female"]
 	validates_presence_of	:username, :password, :firstname, :lastname, :email
   validates_format_of :password, 
-                      :with => /^(\d)*([a-z])*(?=.*[A-Z])([\x20-\x7E]){6,14}$/
+                      :with => /^(\d)*([a-z])*(?=.*[A-Z])([\x20-\x7E]){6,14}$/,
+                      :message => "should contain atleast one uppercase letter and one special character allowed with range between 6-14 characters"
   validates_format_of :username, 
                       :with => /^(\w){3,20}$/,
-                      :message => "should can contain letters[a-z],digits[0-9] and underscore(_) allowed with range between 3-20 characters"
+                      :message => "should contain letters[a-z],digits[0-9] and underscore(_) allowed with range between 3-20 characters"
 
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
