@@ -10,9 +10,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '707a4952295d1c5b3fb29c6e90697724'
 
   def authorize
-    unless User.find_by_id(session[:user_id])
+    if current_user.blank?
       flash[:notice] = "Please log in"
       redirect_to(new_login_path)
+    end
+  end
+
+  def authorize_login
+    if logged_in?
+      flash[:notice] = "Already logged in"
+      redirect_to(todolist_path)
     end
   end
 

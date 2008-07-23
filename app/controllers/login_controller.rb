@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-
+  before_filter :authorize_login, :except => :destroy
   def new
   end
 

@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  before_filter :authorize_login
   def new
     @user = User.new
   end
