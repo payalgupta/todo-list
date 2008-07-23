@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
 	has_many :todolists
   SEX = ["Male", "Female"]
 	validates_presence_of	:username, :password, :firstname, :lastname, :email
+  validates_format_of :password, 
+                      :with => /^(\d)*([a-z])*(?=.*[A-Z])([\x20-\x7E]){6,14}$/
+  validates_format_of :username, 
+                      :with => /^(\w){3,20}$/
+
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
                       :message => "InValid",

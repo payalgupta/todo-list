@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-  before_filter :authorize_login, :except => :destroy
+  before_filter :restrict_if_logged_in, :except => :destroy
   def new
   end
 
@@ -16,7 +16,6 @@ class LoginController < ApplicationController
   end
 
   def destroy
-    p "test"
     session[:user_id] = nil
     flash[:notice] = "You have successfully Logged out"
     redirect_to(new_login_path)	  

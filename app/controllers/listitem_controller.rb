@@ -9,7 +9,6 @@ class ListitemController < ApplicationController
   end
 
   def add_listitem
-    p params
     todolist = Todolist.find(params[:listitem][:todolist_id])
     listitem = Listitem.new(params[:listitem])
     if todolist.listitems << listitem

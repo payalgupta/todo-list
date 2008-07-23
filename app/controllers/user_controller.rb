@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :authorize_login
+  before_filter :restrict_if_logged_in
   def new
     @user = User.new
   end
