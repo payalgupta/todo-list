@@ -3,11 +3,12 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+	helper_method :current_user, :logged_in?
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '707a4952295d1c5b3fb29c6e90697724'
-	helper_method :current_user, :logged_in?
+
   def authorize
     unless User.find_by_id(session[:user_id])
       flash[:notice] = "Please log in"

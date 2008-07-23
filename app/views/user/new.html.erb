@@ -30,7 +30,7 @@
        </p>
        <p>
          <label for="user_birthdate" class="left" style="width:30%;">BirthDate:</label>
-         <%= date_select("user", "birthdate", :start_year => 1900, :order => [:day, :month, :year]) %>       
+         <%= date_select("user", "birthdate", :start_year => 1900, :end_year => Time.now.year, :order => [:day, :month, :year]) %>       
        </p>
        <p>
          <label for="user_sex" class="left" style="width:30%;">Sex:</label>
