@@ -5,10 +5,12 @@ class User < ActiveRecord::Base
 	validates_presence_of	:username, :password, :firstname, :lastname, :email
   validates_format_of :password, 
                       :with => /^(\d)*([a-z])*(?=.*[A-Z])([\x20-\x7E]){6,14}$/,
-                      :message => "should contain atleast one uppercase letter and one special character allowed with range between 6-14 characters"
+                      :message => "should contain atleast one uppercase letter and one special character allowed with range between 6-14 characters",
+                      :if => Proc.new { |u| !u.password.blank? }
   validates_format_of :username, 
                       :with => /^(\w){3,20}$/,
-                      :message => "should contain letters[a-z],digits[0-9] and underscore(_) allowed with range between 3-20 characters"
+                      :message => "should contain letters[a-z],digits[0-9] and underscore(_) allowed with range between 3-20 characters",
+                      :if => Proc.new { |u| !u.username.blank? }
 
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
