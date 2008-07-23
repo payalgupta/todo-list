@@ -1,0 +1,4 @@
+<h3>List of Users</h3>
+<% for user in @users %>
+     <p><%= link_to user.username, user_path(user) %></p>
+<% end %>

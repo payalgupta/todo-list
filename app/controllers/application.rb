@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def restrict_if_logged_in
     if logged_in?
       flash[:notice] = "Already logged in"
-      redirect_to(todolist_path)
+      redirect_to(todolist_index_path)
     end
   end
 

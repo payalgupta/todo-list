@@ -12,9 +12,9 @@ class ListitemController < ApplicationController
     todolist = Todolist.find(params[:listitem][:todolist_id])
     listitem = Listitem.new(params[:listitem])
     if todolist.listitems << listitem
-      redirect_to(todolist_path)
+      redirect_to(todolist_index_path)
     else
-      render(todolist_path)
+      render(:action => 'index')
     end
   end
 

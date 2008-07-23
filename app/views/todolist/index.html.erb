@@ -1,0 +1,14 @@
+<% for todolist in current_user.todolists %>
+	<div>
+	  <h4><u><%= todolist.title %></u></h4>
+	  <p><%= todolist.description %></p>
+    <div>
+    <div id="todolist_<%= todolist.id %>">
+      <% todolist.listitems.each do |listitem| %>
+      <p><%= check_box("listitem", "is_completed", {}) %><%= listitem.listitem %></p>
+      <% end %>
+    </div>
+    <h6><%= link_to_remote "Add List Item", :url => {:controller => 'listitem', :action => 'new', :todolist => todolist.id} %></h6>
+    </div>
+	</div>
+<% end %>

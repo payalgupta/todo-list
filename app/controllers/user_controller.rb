@@ -1,5 +1,6 @@
 class UserController < ApplicationController
-  before_filter :restrict_if_logged_in
+  before_filter :authorize, :only => [:index, :show]
+  before_filter :restrict_if_logged_in, :except => [:index, :show]
   def new
     @user = User.new
   end
@@ -12,6 +13,14 @@ class UserController < ApplicationController
     else
       render(:action => :new)
     end
+  end
+
+  def index
+    @users = User.find(:all)  
+  end
+
+  def show
+    @user = User.find(params[:id])  
   end
 
 	def check_username_availability

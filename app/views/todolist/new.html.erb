@@ -1,6 +1,6 @@
 <%= error_messages_for 'todolist' %> 
 <div>
-  <% form_for @todolist, :url => todolist_path do |form| %>
+  <% form_for @todolist, :url => todolist_index_path do |form| %>
      <p>
        <%= form.label :title %><br />
        <%= form.text_field :title %>
@@ -10,6 +10,6 @@
        <%= form.text_area :description %>
      </p>
        <%= submit_tag "Create" , :class => "submit" %>
-     <%= link_to 'Back', todolist_path %>
+     <%= link_to 'Back', todolist_index_path %>
   <% end %>
 </div>

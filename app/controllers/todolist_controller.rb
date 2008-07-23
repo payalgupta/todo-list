@@ -12,7 +12,7 @@ class TodolistController < ApplicationController
     @todolist.user = current_user
 		if @todolist.save
       flash[:success] = "Todo #{@todolist.title} was successfully created."
-      redirect_to(todolist_path)
+      redirect_to(todolist_index_path)
     else
       render(:action => 'new')
     end

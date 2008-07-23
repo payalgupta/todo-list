@@ -2,7 +2,7 @@
 <div class="signup-form">
   <fieldset>
     <legend>Enter User Details</legend>
-    <% form_for(:user, :url => user_path, :html => { :multipart => true }) do |form| %>
+    <% form_for(:user, :url => user_index_path, :html => { :multipart => true }) do |form| %>
        <p>
          <label for="user_username" class="left" style="width:30%;">UserName:</label>
          <%= form.text_field :username %><%= submit_to_remote "check_availability", "Check Availability", :url =>  check_username_availability_user_path %>

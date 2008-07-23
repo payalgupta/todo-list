@@ -8,7 +8,7 @@ class LoginController < ApplicationController
     user = User.authenticate(params[:username], params[:password])
     if user
 		  session[:user_id] = user.id
-		  redirect_to(todolist_path)
+		  redirect_to(todolist_index_path)
     else
       flash.now[:notice] = "Enter valid username/password"
       render(:action => 'new')
