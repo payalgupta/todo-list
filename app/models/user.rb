@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   validates_format_of :password, 
                       :with => /^(\d)*([a-z])*(?=.*[A-Z])([\x20-\x7E]){6,14}$/
   validates_format_of :username, 
-                      :with => /^(\w){3,20}$/
+                      :with => /^(\w){3,20}$/,
+                      :message => "should can contain letters[a-z],digits[0-9] and underscore(_) allowed with range between 3-20 characters"
 
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
