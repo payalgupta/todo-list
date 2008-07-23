@@ -4,11 +4,10 @@ class UserController < ApplicationController
   end
 
   def create
-    p "test"
     @user = User.new(params[:user])
 		if @user.save
       flash[:success] = "User #{@user.username} was successfully created."
-      redirect_to(login_path)
+      redirect_to(new_login_path)
     else
       render(:action => :new)
     end
@@ -17,18 +16,18 @@ class UserController < ApplicationController
 	def check_username_availability
 		if params[:user][:username].blank?
 			message = "Username should not be blank."
-		else
+      color = '#FF0000'
+		elsif
 		  if User.find_by_username(params[:user][:username])
 		      message = "Username not available"
-          color = {:startcolor => "#FF0000"}
+          color = '#FF0000'
 		  else
 		      message = "Username available."
-          color = {:startcolor => "#00FF00"}
+          color = '#00FF00'
 		  end
 		end 
    		render :update do |page|
-			page.replace_html 'availability_msg', message
-      page['availability_msg'].visual_effect :highlight, color
+			page.replace_html 'availability_msg', "<font color='#{color}'>#{message}</font>"
 		end
   end
 end

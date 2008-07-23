@@ -22,7 +22,7 @@
         </div>
         <div class="right">
           <p><%= link_to 'Create New Todo', new_todolist_path %></p>
-          <p><%= link_to 'Logout', :action => "logout", :controller => :login %></p>
+          <p><%= link_to 'Logout', login_path, :method => 'delete' %></p>
         </div>        
       </div>
       <div id="footer">
