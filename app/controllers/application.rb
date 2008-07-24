@@ -16,6 +16,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_user
+		if active_user == nil
+			flash[:error] = "InValid Action!!!"
+	    redirect_to(todolist_index_path)
+		else
+			if current_user != active_user
+				flash[:error] = "InValid Action!!!"
+			  redirect_to(todolist_index_path)
+			end
+		end
+  end
+
   def restrict_if_logged_in
     if logged_in?
       flash[:notice] = "Already logged in"
@@ -25,6 +37,10 @@ class ApplicationController < ActionController::Base
 
 	def current_user
     @current_user ||= User.find_by_id(session[:user_id])
+  end
+
+	def active_user
+    @active_user ||= User.find(params[:id])
   end
 
 	def logged_in?

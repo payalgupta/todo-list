@@ -2,7 +2,7 @@
 <div class="signup-form">
   <fieldset>
     <legend>Enter User Details</legend>
-    <% form_for(:user, :url => user_index_path, :html => { :multipart => true }) do |form| %>
+    <% form_for(:user, :url => user_index_path) do |form| %>
        <p>
          <label for="user_username" class="left" style="width:30%;">UserName:</label>
          <%= form.text_field :username %><%= submit_to_remote "check_availability", "Check Availability", :url =>  check_username_availability_user_path %>
@@ -30,7 +30,7 @@
        </p>
        <p>
          <label for="user_birthdate" class="left" style="width:30%;">BirthDate:</label>
-         <%= date_select("user", "birthdate", :start_year => 1900, :end_year => Time.now.year, :order => [:day, :month, :year]) %>       
+         <%= date_select("user", "birthdate", :start_year => 1900, :end_year => Time.now.year, :order => [:day, :month, :year], :include_blank => true) %>       
        </p>
        <p>
          <label for="user_sex" class="left" style="width:30%;">Sex:</label>

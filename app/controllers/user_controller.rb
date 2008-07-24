@@ -1,6 +1,7 @@
 class UserController < ApplicationController
-  before_filter :authorize, :only => [:index, :show]
-  before_filter :restrict_if_logged_in, :except => [:index, :show]
+  before_filter :authorize, :except => [:new, :create, :check_username_availability]
+  before_filter :authorize_user, :only => [:edit, :update, :show]
+  before_filter :restrict_if_logged_in, :only => [:new, :create]
   def new
     @user = User.new
   end
@@ -16,11 +17,25 @@ class UserController < ApplicationController
   end
 
   def index
-    @users = User.find(:all)  
+
   end
 
   def show
     @user = User.find(params[:id])  
+  end
+
+  def edit
+    @user = User.find(params[:id])  
+  end
+
+  def update
+    @user = User.find(params[:id]) 
+		if @user.update_attributes(params[:user])
+			flash[:success] = 'User was successfully updated.'
+			redirect_to(user_path(@user))
+		else
+			render(:controller => :user, :action => :edit, :id => @user.id)
+		end
   end
 
 	def check_username_availability

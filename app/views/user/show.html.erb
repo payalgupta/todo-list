@@ -11,5 +11,18 @@
  <label><%= @user.lastname %></label>
 </p>
 <p>
-	<%= link_to 'Back', user_index_path %>
+ <label class="left" style="width:40%;"><b>Email:</b></label>
+ <label><%= @user.email %></label>
+</p>
+<p>
+ <label class="left" style="width:40%;"><b>BirthDate:</b></label>
+ <label><%= @user.birthdate ||= "-" %></label>
+</p>
+<p>
+ <label class="left" style="width:40%;"><b>Sex:</b></label>
+ <label><%= @user.sex ||= "-" %></label>
+</p>
+<p>
+	<%= link_to 'Edit', edit_user_path %>
+  <%= link_to 'Back', todolist_index_path %>
 <p>

@@ -21,6 +21,12 @@
           <%= yield :layout %>
         </div>
         <div class="right">
+          <% if logged_in? %>
+            <p><%= link_to 'HomePage', todolist_index_path %></p>
+            <p><%= link_to 'Create New Todo', new_todolist_path %></p>
+            <p><%= link_to 'Profile', user_path(current_user) %></p>
+            <p><%= link_to 'Logout', login_path, :method => 'delete' %></p>
+          <% end %>
         </div>        
       </div>
       <div id="footer">

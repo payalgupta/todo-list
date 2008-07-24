@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 	require 'digest/sha1'
 	has_many :todolists
   SEX = ["Male", "Female"]
-	validates_presence_of	:username, :password, :firstname, :lastname, :email
+	validates_presence_of	:username, :firstname, :lastname, :email
   validates_format_of :password, 
                       :with => /^(\d)*([a-z])*(?=.*[A-Z])([\x20-\x7E]){6,14}$/,
                       :message => "should contain atleast one uppercase letter and one special character allowed with range between 6-14 characters",
@@ -18,9 +18,15 @@ class User < ActiveRecord::Base
                       :if => Proc.new { |u| !u.email.blank? }
 
 	validates_uniqueness_of	:username, :email
+	validates_confirmation_of	:password,
+                            :if => Proc.new { |u| !u.password.blank? }
 	
 	attr_accessor :password_confirmation
-	validates_confirmation_of :password
+
+  def validate_on_create
+      errors.add(:password, "cannot be blank") unless !password.blank?
+  end
+
 	def password
 		@password
 	end
