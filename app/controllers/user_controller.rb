@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :authorize, :except => [:new, :create, :check_username_availability]
+  before_filter :authorize, :except => [:new, :create, :check_username_availability, :sent_mail]
   before_filter :authorize_user, :only => [:edit, :update, :show]
   before_filter :restrict_if_logged_in, :only => [:new, :create]
   def new
@@ -8,13 +8,15 @@ class UserController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @password = params[:user][:password]
 		if @user.save
-      flash[:success] = "User #{@user.username} was successfully created."
-      redirect_to(new_login_path)
+      email = SignupMailer.create_confirm(@user, @password)
+      render(:text => "<pre>" + email.encoded + "</pre>" )
     else
       render(:action => :new)
     end
   end
+
 
   def index
 

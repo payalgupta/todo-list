@@ -1,0 +1,13 @@
+Dear <%= "#{@user.lastname}, #{@user.firstname}" %>
+You have successfully created your account.
+You can access your account using below credentials:
+
+Username: <%= @user.username %>
+Password: <%= @password %>
+
+Thank you for your registration.
+
+<%= link_to 'Back',new_login_path %>
+
+
+
