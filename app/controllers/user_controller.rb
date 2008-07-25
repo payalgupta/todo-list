@@ -44,7 +44,7 @@ class UserController < ApplicationController
     @user.reset_password_code = nil 
     @user.reset_password_code_until = nil 
 		if @user.update_attributes(params[:user])
-			flash[:success] = 'User was successfully updated.'
+			flash[:success] = 'Password was successfully updated.'
 			redirect_to(new_login_path)
 		else
 			render(:controller => :user, :action => :edit_password, :id => @user.id)
@@ -78,7 +78,7 @@ class UserController < ApplicationController
       email = UserNotifier.deliver_forgot_password(user)
       render(:text => "<pre>" + email.encoded + "</pre>")
     else
-      render :xml => "<errors><error>User not found: #{params[:email]}</error></errors>"
+      render(:text => "User not found: #{params[:email]}")
     end 
   end
 
