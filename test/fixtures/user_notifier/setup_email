@@ -1,0 +1,3 @@
+UserNotifier#setup_email
+
+Find me in app/views/user_notifier/setup_email.erb

@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 	map.root :controller => "login", :action => "new"
-  map.resources :user, :collection => {:check_username_availability => :get}
+  map.resources :user, :collection => {:check_username_availability => :get, :enter_email => :get, :reset_password => :get}
   map.resource :login, :controller => "Login"
   map.resources :todolist
   # The priority is based upon order of creation: first created -> highest priority.
