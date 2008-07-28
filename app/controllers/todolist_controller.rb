@@ -4,9 +4,6 @@ class TodolistController < ApplicationController
     @todolist = Todolist.new
   end
 
-  def show
-  end
-
   def create
     @todolist = Todolist.new(params[:todolist])
     @todolist.user = current_user

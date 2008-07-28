@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
                       :message => "should contain atleast one uppercase letter and one special character allowed with range between 6-14 characters",
                       :if => Proc.new { |u| !u.password.blank? }
   validates_format_of :username, 
-                      :with => /^(\w){3,20}$/,
+                      :with => /^(\w){3,20}$/i,
                       :message => "should contain letters[a-z],digits[0-9] and underscore(_) allowed with range between 3-20 characters",
                       :if => Proc.new { |u| !u.username.blank? }
 

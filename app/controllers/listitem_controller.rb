@@ -4,18 +4,19 @@ class ListitemController < ApplicationController
   def new
     todolist=params[:todolist]
 		render :update do |page|
-			page.insert_html :bottom, "todolist_#{todolist}", :partial => 'new'
+			page.replace_html "new_listitem_#{todolist}", :partial => 'new'
 		end
   end
+
 
   def add_listitem
     todolist = Todolist.find(params[:listitem][:todolist_id])
     listitem = Listitem.new(params[:listitem])
-    if todolist.listitems << listitem
-      redirect_to(todolist_index_path)
-    else
-      render(:action => 'index')
-    end
+    todolist.listitems << listitem
+    render :update do |page|
+	    page.remove "new_listitem_#{todolist.id}"
+      page.insert_html :bottom, "todolist_complete_#{todolist.id}", "<input type='checkbox' id='not_complete_#{listitem.id}'>#{listitem.listitem}"
+		end
   end
 
 end
