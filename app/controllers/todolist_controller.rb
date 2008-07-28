@@ -1,5 +1,5 @@
 class TodolistController < ApplicationController
-  before_filter :authorize
+  before_filter :restrict_if_not_logged_in
   def new
     @todolist = Todolist.new
   end

@@ -1,6 +1,6 @@
 class UserController < ApplicationController
-  before_filter :authorize, :only => [:edit, :update, :show, :index]
-  before_filter :authorize_user, :only => [:edit, :update, :show]
+  before_filter :restrict_if_not_logged_in, :only => [:edit, :update, :show, :index]
+  before_filter :restrict_if_unauthorized, :only => [:edit, :update, :show]
   before_filter :restrict_if_logged_in, :only => [:new, :create]
   def new
     @user = User.new

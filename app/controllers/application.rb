@@ -9,19 +9,19 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '707a4952295d1c5b3fb29c6e90697724'
 
-  def authorize
+  def restrict_if_not_logged_in
     if current_user.blank?
       flash[:notice] = "Please log in"
       redirect_to(new_login_path)
     end
   end
 
-  def authorize_user
-		if active_user == nil
+  def restrict_if_unauthorized
+		if requested_user == nil
 			flash[:error] = "InValid Action!!!"
 	    redirect_to(todolist_index_path)
 		else
-			if current_user != active_user
+			if current_user != requested_user
 				flash[:error] = "InValid Action!!!"
 			  redirect_to(todolist_index_path)
 			end
@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
 
   def restrict_if_logged_in
     if logged_in?
-      flash[:notice] = "Already logged in"
       redirect_to(todolist_index_path)
     end
   end
@@ -39,8 +38,8 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:user_id])
   end
 
-	def active_user
-    @active_user ||= User.find(params[:id])
+	def requested_user
+    @requested_user ||= User.find(params[:id])
   end
 
 	def logged_in?
