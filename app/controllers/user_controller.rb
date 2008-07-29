@@ -39,18 +39,6 @@ class UserController < ApplicationController
 		end
   end
 
-  def save_password
-    @user = User.find(params[:id])
-    @user.reset_password_code = nil 
-    @user.reset_password_code_until = nil 
-		if @user.update_attributes(params[:user])
-			flash[:success] = 'Password was successfully updated.'
-			redirect_to(new_login_path)
-		else
-			render(:controller => :user, :action => :edit_password, :id => @user.id)
-		end
-  end
-
 	def check_username_availability
 		if params[:user][:username].blank?
 			message = "Username should not be blank."
@@ -78,8 +66,9 @@ class UserController < ApplicationController
       email = UserNotifier.deliver_forgot_password(user)
       render(:text => "<pre>" + email.encoded + "</pre>")
     else
-      render(:text => "User not found: #{params[:email]}")
-    end
+      flash.now[:error]="InValid Email Address : Re-Enter"
+      render(:controller => :user, :action => :enter_email)
+    end 
   end
 
   def reset_password
@@ -90,6 +79,18 @@ class UserController < ApplicationController
       flash[:error] = 'Sorry, Request Expired!!!'
       redirect_to(new_login_path)
     end
+  end
+
+  def save_password
+    @user = User.find(params[:id])
+    @user.reset_password_code = nil 
+    @user.reset_password_code_until = nil 
+		if @user.update_attributes(params[:user])
+			flash[:success] = 'Password was successfully updated.'
+			redirect_to(new_login_path)
+		else
+			render(:controller => :user, :action => :edit_password, :id => @user.id)
+		end
   end
 end
 
