@@ -10,13 +10,30 @@ class ListitemController < ApplicationController
 
 
   def add_listitem
-    p "testing"
-    todolist = Todolist.find(params[:listitem][:todolist_id])
-    listitem = Listitem.new(params[:listitem])
-    todolist.completed_listitems << listitem
+    @todolist = Todolist.find(params[:listitem][:todolist_id])
+    @listitem = Listitem.new(params[:listitem])
+    @todolist.completed_listitems << @listitem
     render :update do |page|
-	    page.remove "new_listitem_#{todolist.id}"
-      page.insert_html :bottom, "todolist_complete_#{todolist.id}", "<input type='checkbox' id='not_complete_#{listitem.id}'>#{listitem.listitem}"
+	    page.replace_html "new_listitem_#{@todolist.id}", ""
+      page.insert_html :bottom, "todolist_incomplete_#{@todolist.id}", :partial => 'insert_this'
+		end
+  end
+
+  def update
+    @todolist = Todolist.find(params[:todolist_id])
+    @listitem = Listitem.find(params[:id])
+    @listitem.is_completed = @listitem.is_completed? ? 0 : 1
+    @listitem.update_attributes(params[:listitem])
+    p "test"
+    p @listitem.is_completed
+		render :update do |page|
+      page["block_listitem_#{@listitem.id}"].visual_effect :blind_up
+      if @listitem.is_completed?
+        page.insert_html :top, "todolist_complete_#{@todolist.id}", :partial => 'insert_this'
+      else
+        page.insert_html :bottom, "todolist_incomplete_#{@todolist.id}", :partial => 'insert_this'
+      end
+      page["block_listitem_#{@listitem.id}"].visual_effect :highlight, :duration => 5
 		end
   end
 

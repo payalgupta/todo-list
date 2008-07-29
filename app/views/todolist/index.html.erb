@@ -2,16 +2,16 @@
 	<div>
 	  <h4><u><%= todolist.title %></u></h4>
 	  <p><%= todolist.description %></p>
-        <div id="todolist_complete_<%= todolist.id %>">
+        <div id="todolist_incomplete_<%= todolist.id %>">
           <% todolist.notcompleted_listitems.each do |listitem| %>
-              <p><%= check_box "listitem", "not_complete_#{listitem.id}", {:checked => false} %><%= listitem.listitem %></p>
+              <p <%= "id=block_listitem_#{listitem.id}" %>><%= check_box_tag "listitem_#{listitem.id}", 0, false, {:onclick => remote_function(:url => { :controller => :listitem, :action => :update, :id => listitem.id, :todolist_id => todolist.id })} %><%= listitem.listitem %></p>
           <% end %>
         </div>
       <h6><%= link_to_remote "Add List Item", :url => {:controller => 'listitem', :action => 'new', :todolist => todolist.id} %></h6>
       <div id=<%= "new_listitem_#{todolist.id}"%>></div>
-      <div id="todolist_incomplete_<%= todolist.id %>">
+      <div id="todolist_complete_<%= todolist.id %>">
         <% todolist.completed_listitems.each do |listitem| %>
-            <p><%= check_box("listitem", "is_complete_#{listitem.id}", {:checked => 'checked'}) %><%= listitem.listitem %></p>
+              <p <%= "id=block_listitem_#{listitem.id}" %>><%= check_box_tag "listitem_#{listitem.id}", 1, true, {:onclick => remote_function(:url => { :controller => :listitem, :action => :update, :id => listitem.id, :todolist_id => todolist.id })} %><%= listitem.listitem %></p>
         <% end %>
       </div>
 	</div>
