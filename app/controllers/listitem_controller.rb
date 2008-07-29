@@ -10,9 +10,10 @@ class ListitemController < ApplicationController
 
 
   def add_listitem
+    p "testing"
     todolist = Todolist.find(params[:listitem][:todolist_id])
     listitem = Listitem.new(params[:listitem])
-    todolist.listitems << listitem
+    todolist.completed_listitems << listitem
     render :update do |page|
 	    page.remove "new_listitem_#{todolist.id}"
       page.insert_html :bottom, "todolist_complete_#{todolist.id}", "<input type='checkbox' id='not_complete_#{listitem.id}'>#{listitem.listitem}"
