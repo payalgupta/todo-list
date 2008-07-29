@@ -79,7 +79,7 @@ class UserController < ApplicationController
       render(:text => "<pre>" + email.encoded + "</pre>")
     else
       render(:text => "User not found: #{params[:email]}")
-    end 
+    end
   end
 
   def reset_password

@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
                       :if => Proc.new { |u| !u.email.blank? }
 
 	validates_uniqueness_of	:username, :email
-	validates_confirmation_of	:password,
-                            :if => Proc.new { |u| !u.password.blank? }
+	validates_confirmation_of	:password
 	
 	attr_accessor :password_confirmation
 

@@ -2,7 +2,7 @@
 <%= error_messages_for :user %>
 	<p>
 	 <label for="user_username" class="left" style="width:40%;"><b>UserName:</b></label>
-	 <%= f.text_field :username %>
+	 <%= f.text_field :username, :disabled => 'true' %>
 	</p>
   <div id="availability_msg"></div>
   <p>
