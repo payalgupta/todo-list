@@ -3,7 +3,7 @@ class TodolistController < ApplicationController
   def new
     @todolist = Todolist.new
   end
-
+  
   def create
     @todolist = Todolist.new(params[:todolist])
     @todolist.user = current_user
@@ -14,4 +14,5 @@ class TodolistController < ApplicationController
       render(:action => 'new')
     end
   end
+
 end

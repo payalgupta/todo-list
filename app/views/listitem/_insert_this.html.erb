@@ -1,1 +1,9 @@
-<p <%= "id=block_listitem_#{@listitem.id}" %>><%= check_box_tag "listitem_#{@listitem.id}", 0, @listitem.is_completed?, {:onclick => remote_function(:url => { :controller => :listitem, :action => :update, :id => @listitem.id, :todolist_id => @todolist.id })} %><%= @listitem.listitem %></p>
+<p <%= "id=block_listitem_#{@listitem.id}" %>>
+  <%= check_box_tag "listitem_#{@listitem.id}", 0, @listitem.is_completed?, {:onclick => remote_function(:url => { :controller => :listitem, :action => :update, :id => @listitem.id, :todolist_id => @todolist.id })} %>
+  <% if @listitem.is_completed? %>
+    <%= (@listitem.updated_at).strftime("%b %d") %>
+  <% else %>
+    <%= (@listitem.created_at).strftime("%b %d")%>
+  <% end %>
+  <%= @listitem.listitem %>
+</p>

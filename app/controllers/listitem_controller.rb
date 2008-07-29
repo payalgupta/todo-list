@@ -8,7 +8,6 @@ class ListitemController < ApplicationController
 		end
   end
 
-
   def add_listitem
     @todolist = Todolist.find(params[:listitem][:todolist_id])
     @listitem = Listitem.new(params[:listitem])
